@@ -177,11 +177,13 @@ elementos.btnEjecutar.addEventListener('click', ()=>alert('Busca el archivo en D
 
   <script>
     // ================== CONFIG ==================
-    const archivos = {
-     exe: "https://www.dropbox.com/scl/fi/ia6kr2yht71ktd04e4tlo/InstaladorDonVotex.exe?rlkey=pg2emnumfa3co883g3tteezrp&raw=1",
-      // Reemplaza este link cuando tengas un parche real:
-      parche: "https://www.dropbox.com/scl/fi/xxxxx/parche.exe?raw=1"
-    };
+   const CONFIG = {
+  urlDescarga: "https://dl.dropboxusercontent.com/scl/fi/ytaeotfu5yaazh37p7e2q/Donvoltex_Server_1.0.1.exe?rlkey=it5tlu7lblzw7v1m1v29koecp&st=ysfddxog",
+  nombreArchivo: "Donvoltex_Server_1.0.1.exe",
+  velocidadProgreso: 250,
+  incrementoMin: 5,
+  incrementoMax: 15
+};
 
     // ============ DESCARGAS GENERALES ============
     let descargaEnProgreso = false;
@@ -446,5 +448,6 @@ elementos.btnEjecutar.addEventListener('click', ()=>alert('Busca el archivo en D
 
 </body>
 </html>
+
 
 
