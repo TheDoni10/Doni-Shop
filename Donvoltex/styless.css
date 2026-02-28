@@ -1,0 +1,951 @@
+/* ==========================================
+   DONVOTEX 2025 - CSS AVANZADO CON ANIMACIONES
+   ========================================== */
+
+/* Reset y variables CSS */
+:root {
+  --primary: #00d9ff;
+  --primary-dark: #00a8cc;
+  --secondary: #7000ff;
+  --accent: #ff006e;
+  --success: #00ff88;
+  --warning: #ffb700;
+  --bg-dark: #0a0a0f;
+  --bg-card: rgba(20, 20, 35, 0.7);
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0b0;
+  --gradient-1: linear-gradient(135deg, #00d9ff 0%, #7000ff 100%);
+  --gradient-2: linear-gradient(45deg, #ff006e 0%, #7000ff 100%);
+  --shadow-glow: 0 0 30px rgba(0, 217, 255, 0.3);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   FONDO ANIMADO CON BURBUJAS MEJORADAS
+   ========================================== */
+.background-anim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: 
+    radial-gradient(ellipse at 20% 80%, rgba(112, 0, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(255, 0, 110, 0.05) 0%, transparent 70%),
+    var(--bg-dark);
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-1);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float-up 15s infinite ease-in-out;
+  filter: blur(1px);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+}
+
+.bubble::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: 30%;
+  height: 30%;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+.bubble:nth-child(1) { width: 60px; height: 60px; animation-duration: 12s; animation-delay: 0s; }
+.bubble:nth-child(2) { width: 30px; height: 30px; animation-duration: 18s; animation-delay: 2s; left: 25%; }
+.bubble:nth-child(3) { width: 50px; height: 50px; animation-duration: 14s; animation-delay: 4s; left: 40%; }
+.bubble:nth-child(4) { width: 35px; height: 35px; animation-duration: 16s; animation-delay: 1s; left: 60%; }
+.bubble:nth-child(5) { width: 45px; height: 45px; animation-duration: 13s; animation-delay: 3s; left: 75%; }
+.bubble:nth-child(6) { width: 25px; height: 25px; animation-duration: 19s; animation-delay: 5s; left: 90%; }
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.4;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-120vh) scale(0.5) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL CON ENTRADA ANIMADA
+   ========================================== */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Título principal con efecto de brillo */
+h1 {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 10px;
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  animation: titlePulse 3s ease-in-out infinite;
+  text-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+}
+
+@keyframes titlePulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+}
+
+/* Subtítulo con animación de escritura */
+.container > p:first-of-type {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  animation: fadeIn 1.5s ease-out 0.5s both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================
+   BOTONES CON EFECTOS AVANZADOS
+   ========================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  background: var(--gradient-1);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+  text-decoration: none;
+  margin: 10px;
+  transform: translateY(0);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: 0.5s;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 217, 255, 0.5);
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.btn-rojo {
+  background: linear-gradient(135deg, #ff006e 0%, #ff4d6d 100%);
+  box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3);
+}
+
+.btn-rojo:hover {
+  box-shadow: 0 10px 30px rgba(255, 0, 110, 0.5);
+}
+
+/* Botón de descarga específico */
+#descargarBtn {
+  display: flex;
+  margin: 30px auto;
+  font-size: 1.2rem;
+  padding: 20px 40px;
+  animation: pulseBtn 2s infinite;
+}
+
+@keyframes pulseBtn {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 217, 255, 0.7); }
+  50% { box-shadow: 0 0 0 15px rgba(0, 217, 255, 0); }
+}
+
+/* ==========================================
+   ANIMACIÓN DE DESCARGA MEJORADA
+   ========================================== */
+#animDescarga {
+  margin: 30px 0;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(0, 217, 255, 0.1);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: relative;
+}
+
+.spinner::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--secondary);
+  animation: spin 2s linear infinite reverse;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+#barraCarga {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+#progreso {
+  background: var(--gradient-1) !important;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+#progreso::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+#textoDescarga {
+  color: var(--primary);
+  font-weight: 600;
+  margin-top: 10px;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Descarga completada */
+#descargaCompletada {
+  animation: slideIn 0.5s ease-out;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#descargaCompletada p:first-child {
+  animation: successPulse 2s infinite;
+}
+
+@keyframes successPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ==========================================
+   TARJETAS CON EFECTO GLASSMORPHISM
+   ========================================== */
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 30px;
+  margin: 30px 0;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-1);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), var(--shadow-glow);
+  border-color: rgba(0, 217, 255, 0.3);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.patches-card h2 {
+  color: var(--accent);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.patches-card ul {
+  list-style: none;
+  margin: 20px 0;
+}
+
+.patches-card li {
+  padding: 10px 0;
+  padding-left: 30px;
+  position: relative;
+  color: var(--text-secondary);
+  transition: color 0.3s;
+}
+
+.patches-card li::before {
+  content: '⚡';
+  position: absolute;
+  left: 0;
+  color: var(--warning);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.patches-card li:hover {
+  color: var(--text-primary);
+  transform: translateX(5px);
+}
+
+/* ==========================================
+   NOVEDADES CON ICONOS ANIMADOS
+   ========================================== */
+.novedades-card {
+  list-style: none;
+}
+
+.novedades-card li {
+  padding: 20px;
+  margin: 15px 0;
+  background: rgba(0, 217, 255, 0.05);
+  border-radius: 16px;
+  border-left: 4px solid var(--primary);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.novedades-card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: var(--gradient-1);
+  opacity: 0.1;
+  transition: width 0.4s ease;
+  z-index: 0;
+}
+
+.novedades-card li:hover::before {
+  width: 100%;
+}
+
+.novedades-card li:hover {
+  transform: translateX(10px);
+  border-left-width: 8px;
+}
+
+.novedades-card strong {
+  color: var(--primary);
+  display: block;
+  margin-bottom: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================
+   SECCIÓN FUTURO CON EFECTO NEON
+   ========================================== */
+.future-notice {
+  background: linear-gradient(135deg, rgba(112, 0, 255, 0.1) 0%, rgba(0, 217, 255, 0.1) 100%);
+  border: 2px solid transparent;
+  border-image: var(--gradient-1) 1;
+  border-radius: 24px;
+  padding: 40px;
+  margin-top: 40px;
+  position: relative;
+  overflow: hidden;
+  animation: borderRotate 4s linear infinite;
+}
+
+@keyframes borderRotate {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+.future-notice::before {
+  content: '🔮';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 3rem;
+  opacity: 0.2;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.future-notice h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  background: var(--gradient-2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.future-notice ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  list-style: none;
+  margin: 20px 0;
+}
+
+.future-notice li {
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.future-notice li:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: 0 5px 15px rgba(0, 217, 255, 0.2);
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* ==========================================
+   MODAL MEJORADO CON ANIMACIONES
+   ========================================== */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal.activo {
+  display: flex;
+  opacity: 1;
+}
+
+.modal__box {
+  background: linear-gradient(135deg, rgba(20, 20, 35, 0.95) 0%, rgba(30, 30, 50, 0.95) 100%);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), var(--shadow-glow);
+  transform: scale(0.8) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.modal.activo .modal__box {
+  transform: scale(1) translateY(0);
+  animation: modalEntry 0.5s ease;
+}
+
+@keyframes modalEntry {
+  0% {
+    transform: scale(0.8) translateY(50px);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.05) translateY(-10px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal__box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+  animation: rotate 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.modal__title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: var(--primary);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.modal__text {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.dots::after {
+  content: '';
+  animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60%, 100% { content: '...'; }
+}
+
+.modal__actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.modal__hint {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 20px;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Barra de progreso del modal */
+.progress {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.progress__bar {
+  height: 100%;
+  background: var(--gradient-1);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+  position: relative;
+}
+
+.progress__bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 1s infinite;
+}
+
+/* ==========================================
+   SECCIÓN DE CONTACTO ESTILO CORREO
+   ========================================== */
+.section {
+  margin: 60px 0;
+  animation: fadeInUp 1s ease-out;
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section > p {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+}
+
+.mail-box {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.mail-box:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), var(--shadow-glow);
+  border-color: rgba(0, 217, 255, 0.3);
+}
+
+.mail-header {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.field {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.field label {
+  color: var(--primary);
+  font-weight: 600;
+  min-width: 60px;
+  font-size: 0.95rem;
+}
+
+.field input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 15px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(0, 217, 255, 0.05);
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.2);
+}
+
+form {
+  padding: 25px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 150px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: var(--transition-smooth);
+  margin-bottom: 20px;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(0, 217, 255, 0.05);
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.2);
+}
+
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-enviar {
+  width: 100%;
+  padding: 16px;
+  background: var(--gradient-1);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-enviar::before {
+  content: '✈️';
+  position: absolute;
+  left: -30px;
+  transition: 0.3s;
+}
+
+.btn-enviar:hover::before {
+  left: calc(50% - 60px);
+}
+
+.btn-enviar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 217, 255, 0.4);
+}
+
+.btn-enviar:active {
+  transform: translateY(0);
+}
+
+.form-status {
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ==========================================
+   EFECTOS DE PARTICULAS Y DESTELLOS
+   ========================================== */
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle 1s linear forwards;
+}
+
+@keyframes sparkle {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  .container {
+    padding: 20px 15px;
+  }
+  
+  .future-notice ul {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal__box {
+    padding: 30px 20px;
+    margin: 20px;
+  }
+  
+  .modal__actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  .field {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .field input {
+    width: 100%;
+  }
+}
+
+/* ==========================================
+   SCROLLBAR PERSONALIZADA
+   ========================================== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-1);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* ==========================================
+   SELECCIÓN DE TEXTO
+   ========================================== */
+::selection {
+  background: rgba(0, 217, 255, 0.3);
+  color: white;
+}
