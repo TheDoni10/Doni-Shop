@@ -339,26 +339,18 @@ elementos.btnEjecutar.addEventListener('click', ()=>alert('Busca el archivo en D
       abrirModal();
       estadoBuscando();
 
-      // Espera de 5s "buscando"
       setTimeout(() => {
-        // HEAD al link del parche para verificar si existe
-        const url = archivos.parche;
-        if (!url || /xxxxx/.test(url)) {
-          // Link no configurado
-          estadoNoDisponible();
-          return;
-        }
-        fetch(url, { method: "HEAD" })
-          .then(resp => {
-            if (resp.ok) {
-              estadoDecision();
-            } else {
-              estadoNoDisponible();
-            }
-          })
-          .catch(() => estadoError());
-      }, 5000);
-    });
+  const url = archivos.parche;
+
+  if (!url || url.includes("xxxxx")) {
+    estadoNoDisponible();
+    return;
+  }
+
+  // Si el link existe en configuración, asumimos que hay parche
+  estadoDecision();
+
+}, 5000);
 
     function iniciarDescargaParche() {
       estadoDescargando();
@@ -448,6 +440,7 @@ elementos.btnEjecutar.addEventListener('click', ()=>alert('Busca el archivo en D
 
 </body>
 </html>
+
 
 
 
